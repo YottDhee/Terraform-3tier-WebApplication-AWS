@@ -14,6 +14,10 @@ output "rds_endpoint" {
   value = aws_db_instance.my_rds.endpoint
 }
 
+output "backend_url" {
+  value = aws_lb.external_alb.dns_name
+}
+
 output "db_username" {
   value = var.db_username
 }

@@ -95,6 +95,15 @@ pipeline {
             }
         }
         
+        stage('Update Frontend with Backend URL') {
+            steps {
+                script {
+                    BACKEND_URL = sh(script: "terraform -chdir=terraformFiles output -raw backend_url", returnStdout: true).trim()
+                    sh "sed -i 's|<BACKEND_URL>|${BACKEND_URL}|g' html/index.html"
+                }
+            }
+        }
+
         stage('Deploy HTML to S3') {
             steps {
                 script {
