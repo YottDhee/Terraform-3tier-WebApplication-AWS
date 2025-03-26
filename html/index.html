@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3-Tier AWS Terraform App</title>
+    <link rel="icon" href="data:image/jpeg;base64,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" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Salsa&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <center>
+            <h1> STUDENT REGISTRATION FORM</h1>
+        </center>
+    </div>
+    <div>
+        <center>
+            <form id="inputform">
+                <table id="inputtable" border="1">
+                    <tr>
+                        <td>Name:</td>
+                        <td><input id="name" type="text" /></td>
+                    </tr>
+                    <tr>
+                        <td>Age:</td>
+                        <td><input id="age" type="number" /></td>
+                    </tr>
+                    <tr>
+                        <td>Gender:</td>
+                        <td>
+                            <input id="gendermale" type="radio" name="gender" value="Male"/>Male 
+                            <input id="genderfemale" type="radio" name="gender" value="Female"/>Female
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Course:</td>
+                        <td>
+                            <select id="course">
+                                <option value="">Select a course</option>
+                                <option value="LINUX">LINUX</option>
+                                <option value="JENKINS">JENKINS</option>
+                                <option value="AWS">AWS</option>
+                                <option value="TERRAFORM">TERRAFORM</option>
+                                <option value="DOCKER">DOCKER</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>E-mail:</td>
+                        <td><input id="email" type="email" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button id="save" type="submit" onclick="update(event)">Save</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </center>
+    </div>
+    <div>
+        <center>
+            <form>
+                <table id="resulttable" border="1">
+                    <thead>
+                        <tr>
+                            <th>NAME</th>
+                            <th>AGE</th>
+                            <th>COURSE</th>
+                            <th>GENDER</th>
+                            <th>EMAIL</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <!-- Result rows will be added here dynamically -->
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </center>
+    </div>
+    
+    <script>
+        var formborder = document.getElementsByTagName("form")
+        for (var i = 0; i < formborder.length; i++) {
+            formborder[i].style.border = "ridge 2px black";
+            formborder[i].style.display = "inline-Block"
+        }
+        var inputtableborder = document.getElementById("inputtable")
+        for (var i = 0; i < inputtableborder.length; i++) {
+            inputtableborder[i].style.padding = "5px";
+        }
+        var tablecolborder = document.getElementsByTagName("td")
+        for (var i = 0; i < tablecolborder.length; i++) {
+            tablecolborder[i].style.borderRadius = "3px";
+            tablecolborder[i].style.padding = "2px";
+            tablecolborder[i].style.textAlign = "center";
+            tablecolborder[i].style.fontSize = "16px";
+            tablecolborder[i].style.fontWeight = "700";
+        }
+        var select = document.getElementsByTagName("select")
+        for (var i = 0; i < select.length; i++) {
+            select[i].style.width = "100%";
+        }
+        var button = document.querySelector("#save")
+        button.style.border = "solid 2px black";
+        button.style.margin = "2px";
+        button.style.padding = "5px";
+        button.style.width = "98%";
+        button.style.borderRadius = "3px";
+            
+
+        /*document.getElementById('inputform').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission 
+        });*/
+
+        // selecting the resultplacing element
+        var table = document.getElementById("resulttable").getElementsByTagName("tbody")[0];
+
+        function update(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Change the button's background color to indicate saving
+            button.style.backgroundColor = "skyBlue";
+
+                // Get form values
+                var inputname = document.getElementById("name").value;
+                var inputage = document.getElementById("age").value;
+                var inputgender = document.querySelector('input[name="gender"]:checked');
+                var inputcourse = document.getElementById("course").value;
+                var inputemail = document.getElementById("email").value;
+
+                fetch("http://your-backend-ip:3000/save", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name, email })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert("Data saved successfully!");
+                    document.getElementById("inputname").value = "";
+                    document.getElementById("inputage").value = "";
+                    document.getElementById("inputgender").value = "";
+                    document.getElementById("inputcourse").value = "";
+                    document.getElementById("inputemail").value = "";
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Failed to save data.");
+                });
+                // Log values for debugging
+                    console.log("Name:", name);
+                    console.log("Age:", age);
+                    console.log("Gender:", inputgender ? inputgender.value: null);
+                    console.log("Course:", course);
+                    console.log("Email:", email);
+
+                // Validate form fields
+                if (inputname === "" || inputage === "" || !inputgender || inputcourse === "" || inputemail === "") 
+                {
+                    alert("Please fill out all fields.");
+                    return;
+                }
+
+                // creating a new row element
+                var newRow = table.insertRow();
+
+                // Create new cells and add content to them
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                var cell3 = newRow.insertCell(2);
+                var cell4 = newRow.insertCell(3);
+                var cell5 = newRow.insertCell(4);
+                var cell6 = newRow.insertCell(5);
+
+                // Add content to the new cells
+                cell1.innerHTML = inputname;
+                cell2.innerHTML = inputage;
+                cell3.innerHTML = inputcourse;
+                cell4.innerHTML = inputgender.value;
+                cell5.innerHTML = inputemail;
+                cell6.innerHTML = "<button style='background-color:red' onclick='deleteItem(this)'>DELETE</button></td>"
+
+                // Optional: Display a message to the user
+                alert('Student Form Data Saved!');
+
+                // Clear input fields after saving
+                document.getElementById("name").value = "";
+                document.getElementById("age").value = "";
+                document.querySelector('input[name="gender"]:checked').checked = false;
+                document.getElementById("course").value = "";
+                document.getElementById("email").value = "";
+
+                // Revert button color after a delay
+                setTimeout(function() {
+                    button.style.backgroundColor = ""; // Reverts to default button color
+                }, 1000); // Change 1500 to the desired delay in milliseconds
+
+        }
+
+        function deleteItem(button) {
+            var row = button.parentElement.parentElement;
+            row.remove();
+        }
+
+    </script>
+</body>
+</html>
